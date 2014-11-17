@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116213611) do
+ActiveRecord::Schema.define(version: 20141117013928) do
+
+  create_table "counties", force: true do |t|
+    t.integer  "state_id"
+    t.string   "name"
+    t.string   "county_type"
+    t.integer  "county_id"
+    t.string   "fips"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "counties", ["fips"], name: "index_counties_on_fips", using: :btree
+  add_index "counties", ["slug"], name: "index_counties_on_slug", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
+  resources :counties
   resources :states
 
   get '/:id' => 'states#show'
+  get '/:state/:id' => 'counties#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
