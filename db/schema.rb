@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117013928) do
+ActiveRecord::Schema.define(version: 20141117235446) do
+
+  create_table "cities", force: true do |t|
+    t.integer  "state_id"
+    t.integer  "county_id"
+    t.string   "name"
+    t.decimal  "latitude",   precision: 10, scale: 7
+    t.decimal  "longtitude", precision: 10, scale: 7
+    t.string   "gnis"
+    t.string   "fips"
+    t.integer  "msa"
+    t.integer  "usa"
+    t.integer  "cbsa"
+    t.integer  "csa"
+    t.integer  "psa"
+    t.integer  "dma"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cities", ["fips"], name: "index_cities_on_fips", using: :btree
+  add_index "cities", ["gnis"], name: "index_cities_on_gnis", using: :btree
+  add_index "cities", ["slug"], name: "index_cities_on_slug", using: :btree
 
   create_table "counties", force: true do |t|
     t.integer  "state_id"

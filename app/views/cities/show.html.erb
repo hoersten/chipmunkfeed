@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>State:</strong>
+  <%= @city.state.name %>
+</p>
+
+<p>
+  <strong>County:</strong>
+  <%= @city.county.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @city.name %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @city.latitude %>
+</p>
+
+<p>
+  <strong>Longtitude:</strong>
+  <%= @city.longtitude %>
+</p>
+
+<p>
+  <strong>Gnis:</strong>
+  <%= @city.gnis %>
+</p>
+
+<p>
+  <strong>Fips:</strong>
+  <%= @city.fips %>
+</p>
+
+<p>
+  <strong>Msa:</strong>
+  <%= @city.msa %>
+</p>
+
+<p>
+  <strong>Usa:</strong>
+  <%= @city.usa %>
+</p>
+
+<p>
+  <strong>Cbsa:</strong>
+  <%= @city.cbsa %>
+</p>
+
+<p>
+  <strong>Csa:</strong>
+  <%= @city.csa %>
+</p>
+
+<p>
+  <strong>Psa:</strong>
+  <%= @city.psa %>
+</p>
+
+<p>
+  <strong>Dma:</strong>
+  <%= @city.dma %>
+</p>
+
+<%= link_to 'Edit', edit_city_path(@city) %> |
+<%= link_to 'Back', cities_path %>

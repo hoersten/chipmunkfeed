@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :cities
   resources :counties
   resources :states
 
   get '/:id' => 'states#show'
-  get '/:state/:id' => 'counties#show'
+  get '/:state/:id' => 'counties#show', constraints: { :id => /.+-(county|borough|census-area|parish)/ }
+  get '/:state/:id' => 'cities#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
