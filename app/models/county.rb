@@ -3,6 +3,7 @@ class County < ActiveRecord::Base
 
   friendly_id :build_slug, use: [:slugged, :finders]
   belongs_to :state
+  has_many :cities
 
   validates_presence_of :name, :county_id, :slug
   validates :county_type, inclusion: { in: ['Borough', 'Census Area', 'County', 'Parish', 'City'], message: "%{value} is not a valid county type" }

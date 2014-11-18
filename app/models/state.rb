@@ -3,6 +3,7 @@ class State < ActiveRecord::Base
 
   friendly_id :name, use: [:slugged, :finders]
   has_many :counties
+  has_many :cities
 
   validates_presence_of :name, :state_id, :slug
   validates :abbreviation, length: { in: 2..3 }	
