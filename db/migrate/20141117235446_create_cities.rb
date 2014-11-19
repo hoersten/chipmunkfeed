@@ -5,7 +5,7 @@ class CreateCities < ActiveRecord::Migration
       t.belongs_to :county
       t.string :name
       t.decimal :latitude, :precision => 10, :scale => 7
-      t.decimal :longtitude, :precision => 10, :scale => 7
+      t.decimal :longitude, :precision => 10, :scale => 7
       t.string :gnis
       t.string :fips
       t.integer :msa

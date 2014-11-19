@@ -3,8 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Belongs to</th>
-      <th>Belongs to</th>
+      <th>State</th>
+      <th>County</th>
       <th>Name</th>
       <th>Latitude</th>
       <th>Longtitude</th>
@@ -23,11 +23,11 @@
   <tbody>
     <% @cities.each do |city| %>
       <tr>
-        <td><%= city.belongs_to %></td>
-        <td><%= city.belongs_to %></td>
+        <td><%= city.state.name%></td>
+        <td><%= city.county.name%></td>
         <td><%= city.name %></td>
         <td><%= city.latitude %></td>
-        <td><%= city.longtitude %></td>
+        <td><%= city.longitude %></td>
         <td><%= city.gnis %></td>
         <td><%= city.fips %></td>
         <td><%= city.msa %></td>

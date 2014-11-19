@@ -1,15 +1,20 @@
 class CountiesController < ApplicationController
-  before_action :set_county, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_county, only: [:edit, :update, :destroy]
 
   # GET /counties
   # GET /counties.json
   def index
-    @counties = County.all
+    state = State.find(params[:state]) rescue nil
+    @counties = state.present? ? County.where(state: state) : nil
+    raise ActionController::RoutingError.new('Not Found') if (@counties.nil?)
   end
 
   # GET /counties/1
   # GET /counties/1.json
   def show
+    @county = County.find(params[:state] + '/' + params[:id]) rescue nil
+    raise ActionController::RoutingError.new('Not Found') if (@county.nil?)
   end
 
   # GET /counties/new
@@ -64,7 +69,7 @@ class CountiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_county
-      @county = County.find(params[:state] + '/' + params[:id]) rescue nil
+      @county = County.find(params[:id]) rescue nil
       raise ActionController::RoutingError.new('Not Found') if (@county.nil?)
     end
 

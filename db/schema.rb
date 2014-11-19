@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20141118133038) do
     t.integer  "county_id"
     t.string   "name"
     t.decimal  "latitude",   precision: 10, scale: 7
-    t.decimal  "longtitude", precision: 10, scale: 7
+    t.decimal  "longitude",  precision: 10, scale: 7
     t.string   "gnis"
     t.string   "fips"
     t.integer  "msa"

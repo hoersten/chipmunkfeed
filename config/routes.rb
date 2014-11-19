@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :states
 
   get '/:id' => 'states#show'
+  get '/:state/cities' => 'cities#index'
+  get '/:state/counties' => 'counties#index'
   get '/:state/:id' => 'counties#show', constraints: { :id => /.+-(county|borough|census-area|parish)/ }
   get '/:state/:id' => 'cities#show'
 

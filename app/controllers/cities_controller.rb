@@ -1,15 +1,20 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_city, only: [:edit, :update, :destroy]
 
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.all
+    state = State.find(params[:state]) rescue nil
+    @cities = state.present? ? City.where(state: state) : nil
+    raise ActionController::RoutingError.new('Not Found') if (@cities.nil?)
   end
 
   # GET /cities/1
   # GET /cities/1.json
   def show
+    @city = City.find(params[:state] + '/' + params[:id]) rescue nil
+    raise ActionController::RoutingError.new('Not Found') if (@city.nil?)
   end
 
   # GET /cities/new
@@ -64,7 +69,7 @@ class CitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_city
-      @city = City.find(params[:state] + '/' + params[:id]) rescue nil
+      @city = City.find(params[:id]) rescue nil
       raise ActionController::RoutingError.new('Not Found') if (@city.nil?)
     end
 
