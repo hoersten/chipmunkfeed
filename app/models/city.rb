@@ -4,6 +4,7 @@ class City < ActiveRecord::Base
   friendly_id :build_slug, use: [:slugged, :finders]
   belongs_to :state
   belongs_to :county
+  has_many :description, class_name: CityDescription
 
   validates_presence_of :name, :gnis, :slug
   validates :fips, length: { is: 5 }
@@ -18,6 +19,10 @@ class City < ActiveRecord::Base
 
   def normalize_friendly_id(s)
     self.state.slug + '/' + super
+  end
+
+  def active_description
+    self.description.find_by(active: true)
   end
 
 end

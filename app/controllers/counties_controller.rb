@@ -1,5 +1,5 @@
 class CountiesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_county, only: [:edit, :update, :destroy]
 
   # GET /counties

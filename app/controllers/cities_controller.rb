@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_city, only: [:edit, :update, :destroy]
 
   # GET /cities

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118133038) do
+ActiveRecord::Schema.define(version: 20141119143006) do
 
   create_table "cities", force: true do |t|
     t.integer  "state_id"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 20141118133038) do
 
   add_index "counties", ["fips"], name: "index_counties_on_fips", using: :btree
   add_index "counties", ["slug"], name: "index_counties_on_slug", using: :btree
+
+  create_table "descriptions", force: true do |t|
+    t.integer  "state_id"
+    t.integer  "county_id"
+    t.integer  "city_id"
+    t.text     "description"
+    t.string   "tag"
+    t.boolean  "active"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

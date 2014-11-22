@@ -20,5 +20,10 @@
   <%= @county.fips %>
 </p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @county.active_description.description rescue '' %>
+</p>
+
 <%= link_to 'Edit', edit_county_path(@county) %> |
 <%= link_to 'Back', counties_path %>

@@ -4,6 +4,7 @@ class County < ActiveRecord::Base
   friendly_id :build_slug, use: [:slugged, :finders]
   belongs_to :state
   has_many :cities
+  has_many :description, class_name: CountyDescription
 
   validates_presence_of :name, :county_id, :slug
   validates :county_type, inclusion: { in: ['Borough', 'Census Area', 'County', 'Parish', 'City'], message: "%{value} is not a valid county type" }
@@ -19,6 +20,10 @@ class County < ActiveRecord::Base
 
   def normalize_friendly_id(s)
     self.state.slug + '/' + super
+  end
+
+  def active_description
+    self.description.find_by(active: true)
   end
 
 end
