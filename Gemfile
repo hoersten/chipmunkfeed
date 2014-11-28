@@ -24,7 +24,9 @@ end
 # gem 'unicorn'					# Use unicorn as the app server
 
 group :test do
-  gem 'sqlite3'
+  gem 'minitest'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
 end
 
 group :development, :test do

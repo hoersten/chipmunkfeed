@@ -6,11 +6,11 @@ class City < ActiveRecord::Base
   belongs_to :county
   has_many :description, class_name: CityDescription
 
-  validates_presence_of :name, :gnis, :slug
+  validates_presence_of :name, :gnis, :slug, :county, :state
   validates :fips, length: { is: 5 }
 
   before_validation(on: :create) do
-    self.fips = self.county.fips
+    self.fips = self.county.fips rescue ''
   end
 
   def build_slug
@@ -18,7 +18,7 @@ class City < ActiveRecord::Base
   end
 
   def normalize_friendly_id(s)
-    self.state.slug + '/' + super
+    self.state.slug + '/' + super rescue super
   end
 
   def active_description
