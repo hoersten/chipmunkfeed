@@ -5,7 +5,7 @@ class StatesController < ApplicationController
   # GET /states
   # GET /states.json
   def index
-    @states = State.all
+    @states = State.all.order(:name)
   end
 
   # GET /states/1
@@ -73,4 +73,5 @@ class StatesController < ApplicationController
     def state_params
       params.require(:state).permit(:name, :abbreviation, :state_id, :fips)
     end
+
 end

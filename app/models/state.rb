@@ -6,7 +6,7 @@ class State < ActiveRecord::Base
   has_many :cities
   has_many :description, class_name: StateDescription
 
-  validates_presence_of :name, :state_id, :slug
+  validates_presence_of :name, :state_id, :slug, :latitude, :longitude
   validates :abbreviation, length: { in: 2..3 }	
   validates :fips, length: { is: 5 }
   validates :country, inclusion: { in: %w(US), message: "%{value} is not a valid country code" } 

@@ -5,8 +5,8 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   def index
-    state = State.find(params[:state]) rescue nil
-    @cities = state.present? ? City.where(state: state) : nil
+    @state = State.find(params[:state]) rescue nil
+    @cities = @state.present? ? City.where(state: @state).order(:name) : nil
     raise ActionController::RoutingError.new('Not Found') if (@cities.nil?)
   end
 
@@ -77,4 +77,5 @@ class CitiesController < ApplicationController
     def city_params
       params.require(:city).permit(:belongs_to, :belongs_to, :name, :latitude, :longtitude, :gnis, :fips, :msa, :usa, :cbsa, :csa, :psa, :dma)
     end
+
 end

@@ -1,0 +1,30 @@
+-if notice.present?
+  .row
+    .col-md-12
+      %p#notice
+        = notice
+.row#breadcrumb
+  .col-md-12
+    %ol.breadcrumb
+      %li
+        =link_to 'Home', '/'
+      %li
+        =link_to @county.state.name, '/' + @county.state.slug
+      %li.active
+        =@county.name
+.row
+  .col-md-8.col-sm-6
+    %h1
+      = @county.name
+    %ul
+      %li
+        %strong State:
+        = link_to @county.state.name, '/' + @county.state.slug
+    = render partial: '/shared/web_links', locals: {obj: @county}
+  .col-md-4.col-sm-6.hidden-xs
+    #map_div{ 'data-state' => @county.state.abbreviation, 'data-county' => @county.name, 'data-center-lat' => @county.state.latitude, 'data-center-long' => @county.state.longitude, 'data-center-zoom' => @county.state.zoom }
+
+.row
+  .col-md-12
+    %h2 Description:
+    = @county.active_description.description rescue ''

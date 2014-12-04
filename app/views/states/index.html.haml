@@ -1,0 +1,25 @@
+-if notice.present?
+  .row
+    .col-md-12
+      %p#notice
+        = notice
+.row#breadcrumb
+  .col-md-12
+    %ol.breadcrumb
+      %li
+        =link_to 'Home', '/'
+      %li.active
+        States
+.row
+  .col-md-8.col-sm-6
+    %h1
+      States
+    %h2 Description:
+.row
+  .col-md-12
+    %h3
+      List of States
+  -@states.in_groups_of(4, false).each_with_index do |group, index|
+    -group.each do |state|
+      .col-md-3.col-sm-4.col-xs-6
+        =link_to state.name, '/' + state.slug

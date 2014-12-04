@@ -1,0 +1,9 @@
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+$brand-primary: #587db6;
+$navbar-default-bg: #0b957e;
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "scaffolds";
+@import "states";
+@import "counties";
+@import "cities";

@@ -1,0 +1,13 @@
+- if obj.wikipedia.present? || obj.twitter.present? || obj.url.present?
+  %h2
+    Web Links
+  %ul
+    - if obj.wikipedia.present?
+      %li
+        =link_to 'Wikipedia', obj.wikipedia, :rel => 'nofollow', :target => '_blank'
+    - if obj.twitter.present?
+      %li
+        =link_to 'Twitter', obj.twitter, :rel => 'nofollow', :target => '_blank'
+    - if obj.url.present?
+      %li
+        =link_to 'Official Homepage', obj.url, :rel => 'nofollow', :target => '_blank'

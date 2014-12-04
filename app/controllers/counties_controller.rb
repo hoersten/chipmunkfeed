@@ -5,8 +5,8 @@ class CountiesController < ApplicationController
   # GET /counties
   # GET /counties.json
   def index
-    state = State.find(params[:state]) rescue nil
-    @counties = state.present? ? County.where(state: state) : nil
+    @state = State.find(params[:state]) rescue nil
+    @counties = @state.present? ? County.where(state: @state).order(:name) : nil
     raise ActionController::RoutingError.new('Not Found') if (@counties.nil?)
   end
 
@@ -77,4 +77,5 @@ class CountiesController < ApplicationController
     def county_params
       params.require(:county).permit(:name, :type, :county_id, :fips)
     end
+
 end

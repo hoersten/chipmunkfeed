@@ -28,7 +28,11 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (4.0.1)
+      execjs
     bcrypt (3.1.9)
+    bootstrap-sass (3.3.1.0)
+      sass (~> 3.2)
     builder (3.2.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -63,6 +67,7 @@ GEM
       railties (>= 3.0.0)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
+    haml (3.1.7)
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.2.5)
@@ -171,11 +176,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
+  bootstrap-sass (~> 3.3.1)
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
   factory_girl_rails
   friendly_id (~> 5.0.0)
+  haml
   jbuilder (~> 2.0)
   jquery-rails
   minitest

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119143006) do
+ActiveRecord::Schema.define(version: 20141204003718) do
 
   create_table "cities", force: true do |t|
     t.integer  "state_id"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(version: 20141119143006) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "wikipedia"
+    t.string   "freebase"
+    t.string   "twitter"
+    t.string   "url"
   end
 
   add_index "cities", ["fips"], name: "index_cities_on_fips", using: :btree
@@ -45,6 +49,10 @@ ActiveRecord::Schema.define(version: 20141119143006) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "wikipedia"
+    t.string   "freebase"
+    t.string   "twitter"
+    t.string   "url"
   end
 
   add_index "counties", ["fips"], name: "index_counties_on_fips", using: :btree
@@ -84,6 +92,13 @@ ActiveRecord::Schema.define(version: 20141119143006) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.float    "latitude",     limit: 24
+    t.float    "longitude",    limit: 24
+    t.integer  "zoom"
+    t.string   "wikipedia"
+    t.string   "freebase"
+    t.string   "twitter"
+    t.string   "url"
   end
 
   add_index "states", ["slug"], name: "index_states_on_slug", using: :btree

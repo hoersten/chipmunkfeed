@@ -1,0 +1,34 @@
+-if notice.present?
+  .row
+    .col-md-12
+      %p#notice
+        = notice
+.row#breadcrumb
+  .col-md-12
+    %ol.breadcrumb
+      %li{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
+        =link_to 'Home', '/', 'itemprop' => 'url'
+      %li{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
+        =link_to @city.state.name, '/' + @city.state.slug, 'itemprop' => 'url'
+      %li.active{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
+        %span{ 'itemprop' => 'title' }
+          =@city.name
+.row
+  .col-md-8.col-sm-6{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/City' }
+    %h1{ 'itemprop' => 'name' }
+      = @city.name
+    %ul
+      %li
+        %strong State:
+        = link_to @city.state.name, '/' + @city.state.slug, 'itemprop' => 'containedIn'
+      %li
+        %strong Primary County:
+        = link_to @city.county.name, '/' + @city.county.slug, 'itemprop' => 'containedIn'
+    = render partial: '/shared/web_links', locals: {obj: @city}
+  .col-md-4.col-sm-6.hidden-xs
+    #map_div{ 'data-city-lat' => @city.latitude, 'data-city-long' => @city.longitude, 'data-state' => @city.state.abbreviation, 'data-city' => @city.name, 'data-center-lat' => @city.state.latitude, 'data-center-long' => @city.state.longitude, 'data-center-zoom' => @city.state.zoom }
+
+.row
+  .col-md-12
+    %h2{ 'itemprop' => 'description' } Description:
+    = @city.active_description.description rescue ''

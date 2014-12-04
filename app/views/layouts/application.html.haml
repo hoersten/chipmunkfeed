@@ -1,0 +1,9 @@
+!!!Strict
+%html{html_attrs('en')}
+  =render 'layouts/head'
+  %body{ :class => [controller_name, action_name], 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/WebPage' }
+    #main-container.container-fluid
+      =render 'layouts/body_head'
+      #description
+        = yield
+      =render 'layouts/body_footer'

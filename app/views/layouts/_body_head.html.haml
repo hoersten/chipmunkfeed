@@ -1,0 +1,9 @@
+#header.row
+  %nav.navbar.navbar-default.navbar-fixed-top{ role: 'navigation'}
+    .container-fluid
+      =link_to image_tag('assets/towntidbits.png', alt: 'TownTidbits'), '/', class: 'navbar-brand'
+      .collapse.navbar-collapse
+        =form_tag 'search', class: 'navbar-form navbar-right', role: 'search' do
+          =text_field_tag :search_text, nil, :class => 'form-control', placeholder: 'Search'
+          =submit_tag :Search, :class => 'btn btn-default'
+      
