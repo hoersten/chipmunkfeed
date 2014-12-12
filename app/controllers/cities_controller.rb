@@ -6,7 +6,9 @@ class CitiesController < ApplicationController
   # GET /cities.json
   def index
     @state = State.find(params[:state]) rescue nil
-    @cities = @state.present? ? City.where(state: @state).order(:name) : nil
+    @county = County.find(params[:state] + '/' + params[:county]) rescue nil if (params[:county].present?)
+    @cities = @county.present? ? @county.cities.order(:name) : nil
+    @cities ||= @state.present? ? @state.cities.order(:name) : nil
     raise ActionController::RoutingError.new('Not Found') if (@cities.nil?)
   end
 

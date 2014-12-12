@@ -15,6 +15,10 @@ class State < ActiveRecord::Base
     self.fips = self.state_id.to_s.rjust(2, '0') + "000"
   end
 
+  def capital
+    City.find_by(state:self, state_capital: 1)
+  end
+
   def active_description
     self.description.find_by(active: true)
   end

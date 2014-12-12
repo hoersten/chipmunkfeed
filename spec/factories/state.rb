@@ -4,6 +4,8 @@ FactoryGirl.define do
     state_id 1
     abbreviation "AL"
     country "US"
+    latitude 32.61
+    longitude -86.8073
 
     factory :state_with_counties do
       transient do

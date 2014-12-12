@@ -6,6 +6,8 @@ describe State do
     state = State.new(name: 'Test State',
                       state_id: 1,
                       abbreviation: 'TS',
+                      latitude: 44.3,
+                      longitude: -124.42,
                       country: 'US')
     expect(state).to be_valid
     expect(state.name).to eq('Test State')
@@ -13,6 +15,8 @@ describe State do
     expect(state.state_id).to eq(1)
     expect(state.fips).to eq('01000')
     expect(state.abbreviation).to eq('TS')
+    expect(state.latitude).to eq(44.3)
+    expect(state.longitude).to eq(-124.42)
     expect(state.country).to eq('US')
   end
   it ".new Fail Missing Name" do

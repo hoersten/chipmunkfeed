@@ -15,15 +15,19 @@
     %h1
       = @state.name
     %ul
+      - if (@state.capital.present?)
+        %li
+          %strong Capital:
+          = link_to(@state.capital.name, @state.capital)
       %li
         %strong Abbreviation:
         = @state.abbreviation
       %li
         %strong Counties:
-        = link_to("#{number_with_delimiter(@state.counties.count)} Counties", '/' + @state.slug + '/counties')
+        = link_to("#{number_with_delimiter(@state.counties.count)} Counties", state_counties_path(@state))
       %li
         %strong Cities:
-        = link_to("#{number_with_delimiter(@state.cities.count)} Cities", '/' + @state.slug + '/cities')
+        = link_to("#{number_with_delimiter(@state.cities.count)} Cities", state_cities_path(@state))
     = render partial: '/shared/web_links', locals: {obj: @state}
   .col-md-4.col-sm-6.hidden-xs
     #map_div{ 'data-state' => @state.abbreviation, 'data-center-lat' => @state.latitude, 'data-center-long' => @state.longitude, 'data-center-zoom' => @state.zoom }

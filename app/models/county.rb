@@ -22,6 +22,14 @@ class County < ActiveRecord::Base
     self.state.slug + '/' + super rescue super
   end
 
+  def full_name
+    self.name + ' ' + self.county_type
+  end
+
+  def capitals
+    City.where(county:self).where.not(county_capital: nil).order(:county_capital)
+  end
+
   def active_description
     self.description.find_by(active: true)
   end

@@ -14,6 +14,7 @@ class CountiesController < ApplicationController
   # GET /counties/1.json
   def show
     @county = County.find(params[:state] + '/' + params[:id]) rescue nil
+    @capitals = @county.capitals
     raise ActionController::RoutingError.new('Not Found') if (@county.nil?)
   end
 

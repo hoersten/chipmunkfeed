@@ -9,7 +9,7 @@
       %li{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
         =link_to 'Home', '/', 'itemprop' => 'url'
       %li{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
-        =link_to @city.state.name, '/' + @city.state.slug, 'itemprop' => 'url'
+        =link_to @city.state.name, @city.state, 'itemprop' => 'url'
       %li.active{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
         %span{ 'itemprop' => 'title' }
           =@city.name
@@ -20,10 +20,14 @@
     %ul
       %li
         %strong State:
-        = link_to @city.state.name, '/' + @city.state.slug, 'itemprop' => 'containedIn'
+        = link_to @city.state.name, @city.state, 'itemprop' => 'containedIn'
+        - if (@city.state_capital.present?)
+          (State capital)
       %li
         %strong Primary County:
-        = link_to @city.county.name, '/' + @city.county.slug, 'itemprop' => 'containedIn'
+        = link_to @city.county.full_name, @city.county, 'itemprop' => 'containedIn'
+        - if (@city.county_capital.present?)
+          (County capital)
     = render partial: '/shared/web_links', locals: {obj: @city}
   .col-md-4.col-sm-6.hidden-xs
     #map_div{ 'data-city-lat' => @city.latitude, 'data-city-long' => @city.longitude, 'data-state' => @city.state.abbreviation, 'data-city' => @city.name, 'data-center-lat' => @city.state.latitude, 'data-center-long' => @city.state.longitude, 'data-center-zoom' => @city.state.zoom }
