@@ -9,23 +9,23 @@
       %li{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
         =link_to 'Home', '/', 'itemprop' => 'url'
       %li{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
-        =link_to @city.state.name, @city.state, 'itemprop' => 'url'
+        =link_to @city.state.display, @city.state, 'itemprop' => 'url'
       %li.active{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/Breadcrumb' }
         %span{ 'itemprop' => 'title' }
-          =@city.name
+          =@city.display
 .row
   .col-md-8.col-sm-6{ 'itemscope' => 'itemscope', 'itemtype' => 'http://schema.org/City' }
     %h1{ 'itemprop' => 'name' }
-      = @city.name
+      = @city.display
     %ul
       %li
         %strong State:
-        = link_to @city.state.name, @city.state, 'itemprop' => 'containedIn'
+        = link_to @city.state.display, @city.state, 'itemprop' => 'containedIn'
         - if (@city.state_capital.present?)
           (State capital)
       %li
         %strong Primary County:
-        = link_to @city.county.full_name, @city.county, 'itemprop' => 'containedIn'
+        = link_to @city.county.display, @city.county, 'itemprop' => 'containedIn'
         - if (@city.county_capital.present?)
           (County capital)
     = render partial: '/shared/web_links', locals: {obj: @city}

@@ -3,7 +3,6 @@ class CountiesController < ApplicationController
   before_action :set_county, only: [:edit, :update, :destroy]
 
   # GET /counties
-  # GET /counties.json
   def index
     @state = State.find(params[:state]) rescue nil
     @counties = @state.present? ? County.where(state: @state).order(:name) : nil
@@ -11,7 +10,6 @@ class CountiesController < ApplicationController
   end
 
   # GET /counties/1
-  # GET /counties/1.json
   def show
     @county = County.find(params[:state] + '/' + params[:id]) rescue nil
     @capitals = @county.capitals
@@ -28,42 +26,34 @@ class CountiesController < ApplicationController
   end
 
   # POST /counties
-  # POST /counties.json
   def create
     @county = County.new(county_params)
 
     respond_to do |format|
       if @county.save
         format.html { redirect_to @county, notice: 'County was successfully created.' }
-        format.json { render :show, status: :created, location: @county }
       else
         format.html { render :new }
-        format.json { render json: @county.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /counties/1
-  # PATCH/PUT /counties/1.json
   def update
     respond_to do |format|
       if @county.update(county_params)
         format.html { redirect_to @county, notice: 'County was successfully updated.' }
-        format.json { render :show, status: :ok, location: @county }
       else
         format.html { render :edit }
-        format.json { render json: @county.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /counties/1
-  # DELETE /counties/1.json
   def destroy
     @county.destroy
     respond_to do |format|
       format.html { redirect_to counties_url, notice: 'County was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

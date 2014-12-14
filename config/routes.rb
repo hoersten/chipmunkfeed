@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :counties
   resources :states
 
+  match '/search' => 'search#search', via: [:get, :post]
+
   get '/:id' => 'states#show'
   get '/:state/cities' => 'cities#index'
   get '/:state/counties' => 'counties#index'

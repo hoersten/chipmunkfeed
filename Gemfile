@@ -18,6 +18,10 @@ gem 'jquery-rails'				# Use jquery as the JavaScript library
 gem 'turbolinks'				# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'jbuilder',		'~> 2.0'		# Build JSON APIs with ease. Read more: https://github.com/rails/jbuildei
 gem 'friendly_id',	'~> 5.0.0'		# Note: You MUST use 5.0.0 or greater for Rails 4.0+
+gem 'draper',		'~> 1.3'		# For decorators
+gem 'kaminari'					# Pagination
+gem 'elasticsearch-model'			# Full text searching
+gem 'elasticsearch-rails'			# Full text searching
 
 group :doc do
   gem 'sdoc', 		'~> 0.4.0'		# bundle exec rake doc:rails generates the API under doc/api.

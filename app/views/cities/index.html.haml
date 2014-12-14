@@ -9,16 +9,16 @@
       %li
         =link_to 'Home', '/'
       %li
-        =link_to @state.name, @state
+        =link_to @state.display_name, @state
       - if (@county.present?)
         %li
-          =link_to @county.full_name, @county
+          =link_to @county.display_name, @county
       %li.active
         Cities
 .row
   .col-md-8.col-sm-6
     %h1 
-      = 'Cities in ' + (@county.present? ? @county.full_name + ', ' : "") + @state.name
+      = 'Cities in ' + (@county.present? ? @county.display_name + ', ' : "") + @state.display_name
     %h2 Description:
     = @state.active_description.description rescue ''
   .col-md-4.col-sm-6.hidden-xs
@@ -30,8 +30,5 @@
   -@cities.in_groups_of(4, false).each_with_index do |group, index|
     -group.each do |city|
       .col-md-3.col-sm-4.col-xs-6
-        =link_to city.name, city
-        - if (city.state_capital)
-          (State capital)
-        - if (city.county_capital)
-          (County capital)
+        =link_to city.display_name, city
+        =city.display_capital_info

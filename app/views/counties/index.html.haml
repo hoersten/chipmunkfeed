@@ -9,13 +9,13 @@
       %li
         =link_to 'Home', '/'
       %li
-        =link_to @state.name, @state
+        =link_to @state.display, @state
       %li.active
         Counties
 .row
   .col-md-8.col-sm-6
     %h1 
-      = 'Counties in ' + @state.name
+      = 'Counties in ' + @state.display
     %h2 Description:
     = @state.active_description.description rescue ''
   .col-md-4.col-sm-6.hidden-xs
@@ -27,4 +27,4 @@
   -@counties.in_groups_of(4, false).each_with_index do |group, index|
     -group.each do |county|
       .col-md-3.col-sm-4.col-xs-6
-        =link_to county.full_name, county
+        =link_to county.display, county

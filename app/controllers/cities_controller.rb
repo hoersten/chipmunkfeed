@@ -3,19 +3,17 @@ class CitiesController < ApplicationController
   before_action :set_city, only: [:edit, :update, :destroy]
 
   # GET /cities
-  # GET /cities.json
   def index
-    @state = State.find(params[:state]) rescue nil
-    @county = County.find(params[:state] + '/' + params[:county]) rescue nil if (params[:county].present?)
+    @state = State.find(params[:state]).decorate rescue nil
+    @county = County.find(params[:state] + '/' + params[:county]).decorate rescue nil if (params[:county].present?)
     @cities = @county.present? ? @county.cities.order(:name) : nil
-    @cities ||= @state.present? ? @state.cities.order(:name) : nil
+    @cities ||= @state.present? ? @state.cities.order(:name).decorate : nil
     raise ActionController::RoutingError.new('Not Found') if (@cities.nil?)
   end
 
   # GET /cities/1
-  # GET /cities/1.json
   def show
-    @city = City.find(params[:state] + '/' + params[:id]) rescue nil
+    @city = City.find(params[:state] + '/' + params[:id]).decorate rescue nil
     raise ActionController::RoutingError.new('Not Found') if (@city.nil?)
   end
 
@@ -29,42 +27,34 @@ class CitiesController < ApplicationController
   end
 
   # POST /cities
-  # POST /cities.json
   def create
     @city = City.new(city_params)
 
     respond_to do |format|
       if @city.save
         format.html { redirect_to @city, notice: 'City was successfully created.' }
-        format.json { render :show, status: :created, location: @city }
       else
         format.html { render :new }
-        format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /cities/1
-  # PATCH/PUT /cities/1.json
   def update
     respond_to do |format|
       if @city.update(city_params)
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
-        format.json { render :show, status: :ok, location: @city }
       else
         format.html { render :edit }
-        format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /cities/1
-  # DELETE /cities/1.json
   def destroy
     @city.destroy
     respond_to do |format|
       format.html { redirect_to cities_url, notice: 'City was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
