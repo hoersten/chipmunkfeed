@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :states
 
   match '/search' => 'search#search', via: [:get, :post]
+  get '/search/autocomplete' => 'search#autocomplete'
 
   get '/:id' => 'states#show'
   get '/:state/cities' => 'cities#index'

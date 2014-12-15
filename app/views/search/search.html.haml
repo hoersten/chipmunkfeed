@@ -20,12 +20,12 @@
       %h1
         ="#{@search.total_count} Search results for "
         =@keywords
-      -@results.each do |r|
+      -@search.results.each do |r|
         .col-md-3.col-sm-4.col-xs-6
           =link_to r.decorate.search_display, r
   .row
     .col-md-12
-      = paginate @search.results
+      = paginate @search
 - else
   .row
     .col-md-12

@@ -3,8 +3,9 @@
     .container-fluid
       =link_to image_tag('assets/towntidbits.png', alt: 'TownTidbits'), '/', class: 'navbar-brand'
       .collapse.navbar-collapse
-        =form_tag '/search', class: 'navbar-form navbar-right', role: 'search', method: 'get' do
-          =text_field_tag :search_text, @keywords, :class => 'form-control', placeholder: 'Search'
+        =form_tag '/search', class: 'navbar-form navbar-right', role: 'search', method: 'get', id: 'search_form'  do
+          =text_field_tag :search_text, @keywords, :class => 'form-control', placeholder: 'Search', autocomplete: 'off'
+          =hidden_field_tag :auto_select, false
           - if (@state.present?)
             =hidden_field_tag :state, @state.id.to_s
           - if (@county.present?)

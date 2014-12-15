@@ -1,3 +1,18 @@
 // Place all the styles related to the search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.ui-autocomplete {
+  z-index: 10000;
+  padding-left: 0px;
+  margin-left: 0px;
+  list-style-type: none;
+  .ui-menu-item {
+    font-size: 80%;
+    padding: $padding-base-vertical $padding-base-horizontal $padding-base-vertical $padding-base-horizontal;
+    a {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

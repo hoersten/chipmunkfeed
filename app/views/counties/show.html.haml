@@ -9,23 +9,23 @@
       %li
         =link_to 'Home', '/'
       %li
-        =link_to @county.state.display, @county.state
+        =link_to @county.state.decorate.display_name, @county.state
       %li.active
-        =@county.display
+        =@county.display_name
 .row
   .col-md-8.col-sm-6
     %h1
-      = @county.display
+      = @county.display_name
     %ul
       %li
         %strong State:
-        = link_to @county.state.display, @county.state
+        = link_to @county.state.decorate.display_name, @county.state
       - if @capitals.length > 0
         %li
           %strong
             = "#{@county.county_type} #{'Seat'.pluralize(@capitals.length)}:"
           - @capitals.each_with_index do |city, index|
-            = (link_to(city.display, city) + (index < (@capitals.length - 1) ? ', ' : '')).html_safe
+            = (link_to(city.decorate.display_name, city) + (index < (@capitals.length - 1) ? ', ' : '')).html_safe
       %li
         %strong Cities:
         = link_to("#{number_with_delimiter(@county.cities.count)} Cities", county_cities_path(@county))

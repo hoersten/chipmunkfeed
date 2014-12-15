@@ -30,5 +30,5 @@
   -@cities.in_groups_of(4, false).each_with_index do |group, index|
     -group.each do |city|
       .col-md-3.col-sm-4.col-xs-6
-        =link_to city.display_name, city
-        =city.display_capital_info
+        =link_to city.decorate.display_name, city
+        =city.decorate.display_capital_info

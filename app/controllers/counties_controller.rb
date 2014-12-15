@@ -4,14 +4,14 @@ class CountiesController < ApplicationController
 
   # GET /counties
   def index
-    @state = State.find(params[:state]) rescue nil
-    @counties = @state.present? ? County.where(state: @state).order(:name) : nil
+    @state = State.find(params[:state]).decorate rescue nil
+    @counties = @state.present? ? County.where(state: @state).order(:name).decorate : nil
     raise ActionController::RoutingError.new('Not Found') if (@counties.nil?)
   end
 
   # GET /counties/1
   def show
-    @county = County.find(params[:state] + '/' + params[:id]) rescue nil
+    @county = County.find(params[:state] + '/' + params[:id]).decorate rescue nil
     @capitals = @county.capitals
     raise ActionController::RoutingError.new('Not Found') if (@county.nil?)
   end
