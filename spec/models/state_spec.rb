@@ -8,6 +8,8 @@ describe State do
                       abbreviation: 'TS',
                       latitude: 44.3,
                       longitude: -124.42,
+                      population: 133444,
+                      area: 1231.44,
                       country: 'US')
     expect(state).to be_valid
     expect(state.name).to eq('Test State')
@@ -17,6 +19,8 @@ describe State do
     expect(state.abbreviation).to eq('TS')
     expect(state.latitude).to eq(44.3)
     expect(state.longitude).to eq(-124.42)
+    expect(state.population).to eq(133444)
+    expect(state.area).to eq(1231.44)
     expect(state.country).to eq('US')
   end
   it ".new Fail Missing Name" do

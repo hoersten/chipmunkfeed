@@ -22,6 +22,8 @@
       %li
         %strong Abbreviation:
         = @state.abbreviation
+      = render partial: '/shared/population', locals: {obj: @state}
+      = render partial: '/shared/area', locals: {obj: @state}
       %li
         %strong Counties:
         = link_to("#{number_with_delimiter(@state.counties.count)} Counties", state_counties_path(@state))

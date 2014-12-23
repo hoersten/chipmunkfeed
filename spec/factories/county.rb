@@ -3,6 +3,8 @@ FactoryGirl.define do
     name "Autauga"
     county_id 1
     county_type "County"
+    population 54571
+    area 604.45
     association :state, factory: :state
 
     factory :county_with_cities do

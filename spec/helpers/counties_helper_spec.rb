@@ -10,6 +10,11 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe CountiesHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe CountiesHelper, type: :helper do
+  describe "county_cities_path" do
+    it "county_cities_path" do
+      county = FactoryGirl.create(:county)
+      expect(county_cities_path(county)).to eq('/' + county.slug + '/cities')
+    end
+  end
 end

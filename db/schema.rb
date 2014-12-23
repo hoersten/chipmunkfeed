@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207195122) do
+ActiveRecord::Schema.define(version: 20141219235629) do
 
   create_table "cities", force: true do |t|
     t.integer  "state_id"
     t.integer  "county_id"
     t.string   "name"
-    t.decimal  "latitude",                 precision: 10, scale: 7
-    t.decimal  "longitude",                precision: 10, scale: 7
+    t.decimal  "latitude",                  precision: 10, scale: 7
+    t.decimal  "longitude",                 precision: 10, scale: 7
     t.string   "gnis"
     t.string   "fips"
     t.integer  "msa"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20141207195122) do
     t.string   "url"
     t.integer  "state_capital",  limit: 1
     t.integer  "county_capital", limit: 1
+    t.integer  "population"
+    t.float    "area",           limit: 24
   end
 
   add_index "cities", ["county_capital", "county_id"], name: "index_cities_on_county_capital_and_county_id", using: :btree
@@ -43,6 +45,8 @@ ActiveRecord::Schema.define(version: 20141207195122) do
   add_index "cities", ["gnis"], name: "index_cities_on_gnis", using: :btree
   add_index "cities", ["slug"], name: "index_cities_on_slug", using: :btree
   add_index "cities", ["state_capital", "state_id"], name: "index_cities_on_state_capital_and_state_id", using: :btree
+  add_index "cities", ["state_id", "county_id", "population"], name: "index_cities_on_state_id_and_county_id_and_population", using: :btree
+  add_index "cities", ["state_id", "population"], name: "index_cities_on_state_id_and_population", using: :btree
 
   create_table "counties", force: true do |t|
     t.integer  "state_id"
@@ -57,10 +61,13 @@ ActiveRecord::Schema.define(version: 20141207195122) do
     t.string   "freebase"
     t.string   "twitter"
     t.string   "url"
+    t.integer  "population"
+    t.float    "area",        limit: 24
   end
 
   add_index "counties", ["fips"], name: "index_counties_on_fips", using: :btree
   add_index "counties", ["slug"], name: "index_counties_on_slug", using: :btree
+  add_index "counties", ["state_id", "population"], name: "index_counties_on_state_id_and_population", using: :btree
 
   create_table "descriptions", force: true do |t|
     t.integer  "state_id"
@@ -103,6 +110,8 @@ ActiveRecord::Schema.define(version: 20141207195122) do
     t.string   "freebase"
     t.string   "twitter"
     t.string   "url"
+    t.integer  "population"
+    t.float    "area",         limit: 24
   end
 
   add_index "states", ["slug"], name: "index_states_on_slug", using: :btree

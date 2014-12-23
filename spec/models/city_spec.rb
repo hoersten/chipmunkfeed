@@ -7,6 +7,8 @@ describe City do
     county = FactoryGirl.create(:county, county_id: 44, state: state)
     city = City.new(name: 'Test City',
                     gnis: '1003',
+                    population: 1223441,
+                    area: 1233.144,
                     state: state,
                     county: county)
     expect(city).to be_valid
@@ -14,6 +16,8 @@ describe City do
     expect(city.slug).to eq(state.slug + '/test-city')
     expect(city.fips).to eq('02044')
     expect(city.gnis).to eq('1003')
+    expect(city.population).to eq(1223441)
+    expect(city.area).to eq(1233.144)
     expect(city.county).to eq(county)
     expect(city.state).to eq(state)
   end

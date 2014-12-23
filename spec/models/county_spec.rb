@@ -7,12 +7,16 @@ describe County do
     county = County.new(name: 'Test County',
                       county_id: 1,
                       county_type: 'County',
+                      population: 111244,
+                      area: 110014.14,
                       state: state)
     expect(county).to be_valid
     expect(county.name).to eq('Test County')
     expect(county.slug).to eq(state.slug + '/test-county-county')
     expect(county.county_id).to eq(1)
     expect(county.fips).to eq('02001')
+    expect(county.population).to eq(111244)
+    expect(county.area).to eq(110014.14)
     expect(county.county_type).to eq('County')
   end
   it ".new Fail Missing Name" do

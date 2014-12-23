@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/tyrauber/census_api.git
+  revision: e1614ffcbd2da53c4705ab71e9990b98a95169ae
+  specs:
+    census_api (1.0.8)
+      hpricot
+      rest-client
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,6 +93,7 @@ GEM
     haml (3.1.7)
     hashie (3.3.2)
     hike (1.2.3)
+    hpricot (0.8.6)
     i18n (0.6.11)
     jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
@@ -111,6 +120,7 @@ GEM
     multi_json (1.10.1)
     multipart-post (2.0.0)
     mysql2 (0.3.17)
+    netrc (0.10.2)
     orm_adapter (0.5.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -146,6 +156,9 @@ GEM
     request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -210,6 +223,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.1)
+  census_api!
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
@@ -228,6 +242,7 @@ DEPENDENCIES
   pry-doc
   rails (= 4.1.7)
   rspec
+  rspec-mocks
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

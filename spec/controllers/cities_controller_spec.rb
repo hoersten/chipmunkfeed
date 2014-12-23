@@ -18,86 +18,76 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe CitiesController do
-
-  # This should return the minimal set of attributes required to create a valid
-  # City. As you add validations to City, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    { "belongs_to" => "" }
-  end
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # CitiesController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+describe CitiesController, type: :controller do
+  login_admin
 
   describe "GET index" do
     it "assigns all cities as @cities" do
-      city = City.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:cities).should eq([city])
+      state = FactoryGirl.create(:state_with_cities)
+      get :index, { state: state.slug }
+      expect(assigns(:cities)).to eq(state.cities)
     end
   end
 
   describe "GET show" do
     it "assigns the requested city as @city" do
-      city = City.create! valid_attributes
-      get :show, {:id => city.to_param}, valid_session
-      assigns(:city).should eq(city)
+      city = FactoryGirl.create(:city)
+      get :show, {:state => city.state.slug, :id => (city.slug.gsub(city.state.slug + '/', ''))}
+      expect(assigns(:city)).to eq(city)
     end
   end
 
   describe "GET new" do
     it "assigns a new city as @city" do
-      get :new, {}, valid_session
-      assigns(:city).should be_a_new(City)
+      get :new, {}
+      expect(assigns(:city)).to be_a_new(City)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested city as @city" do
-      city = City.create! valid_attributes
-      get :edit, {:id => city.to_param}, valid_session
-      assigns(:city).should eq(city)
+      city = FactoryGirl.create(:city)
+      get :edit, {:id => city.to_param}
+      expect(assigns(:city)).to eq(city)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
       it "creates a new City" do
+        city = FactoryGirl.create(:city)
         expect {
-          post :create, {:city => valid_attributes}, valid_session
+          post :create, {:city => city.attributes}
         }.to change(City, :count).by(1)
       end
 
       it "assigns a newly created city as @city" do
-        post :create, {:city => valid_attributes}, valid_session
-        assigns(:city).should be_a(City)
-        assigns(:city).should be_persisted
+        city = FactoryGirl.create(:city)
+        post :create, {:city => city.attributes}
+        expect(assigns(:city)).to be_a(City)
+        expect(assigns(:city)).to be_persisted
       end
 
       it "redirects to the created city" do
-        post :create, {:city => valid_attributes}, valid_session
-        response.should redirect_to(City.last)
+        city = FactoryGirl.create(:city)
+        post :create, {:city => city.attributes}
+        expect(response).to redirect_to(City.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved city as @city" do
         # Trigger the behavior that occurs when invalid params are submitted
-        City.any_instance.stub(:save).and_return(false)
-        post :create, {:city => { "belongs_to" => "invalid value" }}, valid_session
-        assigns(:city).should be_a_new(City)
+        allow_any_instance_of(City).to receive(:save).and_return(false)
+        post :create, {:city => { :state => nil }}
+        expect(assigns(:city)).to be_a_new(City)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        City.any_instance.stub(:save).and_return(false)
-        post :create, {:city => { "belongs_to" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        allow_any_instance_of(City).to receive(:save).and_return(false)
+        post :create, {:city => { :state => nil }}
+        expect(response).to render_template("new")
       end
     end
   end
@@ -105,59 +95,59 @@ describe CitiesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested city" do
-        city = City.create! valid_attributes
+        city = FactoryGirl.create(:city)
         # Assuming there are no other cities in the database, this
         # specifies that the City created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        City.any_instance.should_receive(:update_attributes).with({ "belongs_to" => "" })
-        put :update, {:id => city.to_param, :city => { "belongs_to" => "" }}, valid_session
+        expect(allow_any_instance_of(City)).to receive(:update_attributes).with({ "name" => "My Name" })
+        put :update, {:id => city.to_param, :city => { "name" => "My Name" }}
       end
 
       it "assigns the requested city as @city" do
-        city = City.create! valid_attributes
-        put :update, {:id => city.to_param, :city => valid_attributes}, valid_session
-        assigns(:city).should eq(city)
+        city = FactoryGirl.create(:city)
+        put :update, {:id => city.to_param, :city => city.attributes}
+        expect(assigns(:city)).to eq(city)
       end
 
       it "redirects to the city" do
-        city = City.create! valid_attributes
-        put :update, {:id => city.to_param, :city => valid_attributes}, valid_session
-        response.should redirect_to(city)
+        city = FactoryGirl.create(:city)
+        put :update, {:id => city.to_param, :city => city.attributes}
+        expect(response).to redirect_to(city)
       end
     end
 
     describe "with invalid params" do
       it "assigns the city as @city" do
-        city = City.create! valid_attributes
+        city = FactoryGirl.create(:city)
         # Trigger the behavior that occurs when invalid params are submitted
-        City.any_instance.stub(:save).and_return(false)
-        put :update, {:id => city.to_param, :city => { "belongs_to" => "invalid value" }}, valid_session
-        assigns(:city).should eq(city)
+        allow_any_instance_of(City).to receive(:save).and_return(false)
+        put :update, {:id => city.to_param, :city => { :state => nil }}
+        expect(assigns(:city)).to eq(city)
       end
 
       it "re-renders the 'edit' template" do
-        city = City.create! valid_attributes
+        city = FactoryGirl.create(:city)
         # Trigger the behavior that occurs when invalid params are submitted
-        City.any_instance.stub(:save).and_return(false)
-        put :update, {:id => city.to_param, :city => { "belongs_to" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(allow_any_instance_of(City)).to receive(:save).and_return(false)
+        put :update, {:id => city.to_param, :city => { :state => nil }}
+        expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested city" do
-      city = City.create! valid_attributes
+      city = FactoryGirl.create(:city)
       expect {
-        delete :destroy, {:id => city.to_param}, valid_session
+        delete :destroy, {:id => city.to_param}
       }.to change(City, :count).by(-1)
     end
 
     it "redirects to the cities list" do
-      city = City.create! valid_attributes
-      delete :destroy, {:id => city.to_param}, valid_session
-      response.should redirect_to(cities_url)
+      city = FactoryGirl.create(:city)
+      delete :destroy, {:id => city.to_param}
+      expect(response).to redirect_to(cities_url)
     end
   end
 

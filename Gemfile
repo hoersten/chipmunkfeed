@@ -23,6 +23,9 @@ gem 'draper',		'~> 1.3'		# For decorators
 gem 'kaminari'					# Pagination
 gem 'searchkick'				# Searching
 
+# Data APIs
+gem 'census_api',	git: 'git://github.com/tyrauber/census_api.git'	# API for pulling US Census data
+
 group :doc do
   gem 'sdoc', 		'~> 0.4.0'		# bundle exec rake doc:rails generates the API under doc/api.
 end
@@ -42,6 +45,7 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'rspec'					# BDD for Ruby
   gem 'rspec-rails'				# BDD for RoR
+  gem 'rspec-mocks'				# BDD for RoR
   gem 'spring'					# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 # gem 'capistrano-rails'			# Use Capistrano for deployment
 end

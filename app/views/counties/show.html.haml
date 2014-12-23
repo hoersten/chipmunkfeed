@@ -26,6 +26,8 @@
             = "#{@county.county_type} #{'Seat'.pluralize(@capitals.length)}:"
           - @capitals.each_with_index do |city, index|
             = (link_to(city.decorate.display_name, city) + (index < (@capitals.length - 1) ? ', ' : '')).html_safe
+      = render partial: '/shared/population', locals: {obj: @county}
+      = render partial: '/shared/area', locals: {obj: @county}
       %li
         %strong Cities:
         = link_to("#{number_with_delimiter(@county.cities.count)} Cities", county_cities_path(@county))

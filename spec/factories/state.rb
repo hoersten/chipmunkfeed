@@ -6,6 +6,8 @@ FactoryGirl.define do
     country "US"
     latitude 32.61
     longitude -86.8073
+    population 4833722
+    area 52419
 
     factory :state_with_counties do
       transient do
