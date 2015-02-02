@@ -27,8 +27,9 @@
   .col-md-12
     %h3 
       List of Cities
-  -@cities.in_groups_of(4, false).each_with_index do |group, index|
-    -group.each do |city|
-      .col-md-3.col-sm-4.col-xs-6
-        =link_to city.decorate.display_name, city
-        =city.decorate.display_capital_info
+    %ul.list_of.cities
+      -@cities.in_groups_of(4, false).each_with_index do |group, index|
+        -group.each do |city|
+          %li.col-md-3.col-sm-4.col-xs-6
+            =link_to city.decorate.display_name, city
+            =city.decorate.display_capital_info

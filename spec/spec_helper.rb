@@ -58,9 +58,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  # Support for logging in for controllers
-  require 'devise'
-  config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+
+  # Support for logging in for requests
+  config.include RequestMacros, :type => :request
 
 end

@@ -9,7 +9,7 @@
           - if (@state.present?)
             =hidden_field_tag :state, @state.id.to_s
           - if (@county.present?)
-            =hidden_field_tag :state, @county.state.id.to_s
+            =hidden_field_tag :state, @county.state.id.to_s rescue ''
             =hidden_field_tag :county, @county.id.to_s
           =submit_tag :Search, :class => 'btn btn-default'
       

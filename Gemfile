@@ -10,7 +10,6 @@ gem 'bootstrap-sass',	'~> 3.3.1'		# Bootstrap for CSS
 gem 'autoprefixer-rails'
 gem 'uglifier',		'>= 1.3.0'		# Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails',	'~> 4.0.0'		# Use CoffeeScript for .js.coffee assets and views
-gem 'devise'					# User authentication
 gem 'haml'
 # gem 'therubyracer',  platforms: :ruby		# See https://github.com/sstephenson/execjs#readme for more supported runtimes
 
@@ -43,9 +42,10 @@ group :development, :test do
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-debugger'
+  gem 'spring'					# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rspec'					# BDD for Ruby
   gem 'rspec-rails'				# BDD for RoR
   gem 'rspec-mocks'				# BDD for RoR
-  gem 'spring'					# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'rspec-activemodel-mocks'
 # gem 'capistrano-rails'			# Use Capistrano for deployment
 end

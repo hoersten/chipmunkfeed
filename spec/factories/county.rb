@@ -7,6 +7,10 @@ FactoryGirl.define do
     area 604.45
     association :state, factory: :state
 
+    trait :county_with_invalid_id do
+      county_id -1
+    end
+
     factory :county_with_cities do
       transient do
         city_count 5

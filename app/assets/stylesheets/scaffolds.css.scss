@@ -8,3 +8,12 @@ body {
 #footer {
   text-align: center;
 }
+ul.list_of {
+  padding-left: 0px;
+  margin-left: 0px;
+  li {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+}

@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  resources :cities
-  resources :counties
-  resources :states
-
   match '/search' => 'search#search', via: [:get, :post]
   get '/search/autocomplete' => 'search#autocomplete'
 
-  get '/:id' => 'states#show'
-  get '/:state/cities' => 'cities#index'
-  get '/:state/counties' => 'counties#index'
-  get '/:state/:id' => 'counties#show', constraints: { :id => /.+-(county|borough|census-area|parish)/ }
-  get '/:state/:id' => 'cities#show'
-  get '/:state/:county/cities' => 'cities#index', constraints: { :county => /.+-(county|borough|census-area|parish)/ }
+  # States
+  get '/states'            => 'states#index', as: 'states'
+  get '/:id'               => 'states#show', as: 'state'
+
+  # Counties
+  get '/:state/counties'     => 'counties#index', as: 'state_counties'
+  get '/:state/:id'          => 'counties#show', constraints: { :id => /.+-(county|borough|census-area|parish)/ }, as: 'county'
+
+  # Cities
+  get '/:state/cities'         => 'cities#index', as: 'state_cities'
+  get '/:state/:id'            => 'cities#show', as: 'city'
+  get '/:state/:county/cities' => 'cities#index', constraints: { :county => /.+-(county|borough|census-area|parish)/ }, as: 'county_cities'
 
   root 'homepage#index'
 

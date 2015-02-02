@@ -19,7 +19,6 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe CountiesController, type: :controller do
-  login_admin
 
   describe "GET index" do
     it "assigns all counties as @counties" do
@@ -34,120 +33,6 @@ describe CountiesController, type: :controller do
       county = FactoryGirl.create(:county)
       get :show, {:state => county.state.slug, :id => (county.slug.gsub(county.state.slug + '/', ''))}
       expect(assigns(:county)).to eq(county)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new county as @county" do
-      get :new, {}
-      expect(assigns(:county)).to be_a_new(County)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested county as @county" do
-      county = FactoryGirl.create(:county)
-      get :edit, {:id => county.to_param}
-      expect(assigns(:county)).to eq(county)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new County" do
-        county = FactoryGirl.create(:county)
-        expect {
-          post :create, {:county => county.attributes}
-        }.to change(County, :count).by(1)
-      end
-
-      it "assigns a newly created county as @county" do
-        county = FactoryGirl.create(:county)
-        post :create, {:county => county.attributes}
-        expect(assigns(:county)).to be_a(County)
-        expect(assigns(:county)).to be_persisted
-      end
-
-      it "redirects to the created county" do
-        county = FactoryGirl.create(:county)
-        post :create, {:county => county.attributes}
-        expect(response).to redirect_to(County.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved county as @county" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(County).to receive(:save).and_return(false)
-        post :create, {:county => { :state => nil }}
-        expect(assigns(:county)).to be_a_new(County)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(County).to receive(:save).and_return(false)
-        post :create, {:county => { :state => nil }}
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested county" do
-        county = FactoryGirl.create(:county)
-        # Assuming there are no other counties in the database, this
-        # specifies that the County created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        expect(allow_any_instance_of(County)).to receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => county.to_param, :county => { "name" => "MyString" }}
-      end
-
-      it "assigns the requested county as @county" do
-        county = FactoryGirl.create(:county)
-        put :update, {:id => county.to_param, :county => county.attributes}
-        expect(assigns(:county)).to eq(county)
-      end
-
-      it "redirects to the county" do
-        county = FactoryGirl.create(:county)
-        put :update, {:id => county.to_param, :county => county.attributes}
-        expect(response).to redirect_to(county)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the county as @county" do
-        county = FactoryGirl.create(:county)
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(County).to receive(:save).and_return(false)
-        put :update, {:id => county.to_param, :county => { "name" => "invalid value" }}
-        expect(assigns(:county)).to eq(county)
-      end
-
-      it "re-renders the 'edit' template" do
-        county = FactoryGirl.create(:county)
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(County).to receive(:save).and_return(false)
-        put :update, {:id => county.to_param, :county => { "name" => "invalid value" }}
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested county" do
-      county = FactoryGirl.create(:county)
-      expect {
-        delete :destroy, {:id => county.to_param}
-      }.to change(County, :count).by(-1)
-    end
-
-    it "redirects to the counties list" do
-      county = FactoryGirl.create(:county)
-      delete :destroy, {:id => county.to_param}
-      expect(response).to redirect_to(counties_url)
     end
   end
 

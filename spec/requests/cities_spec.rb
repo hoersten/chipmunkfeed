@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe "Cities" do
+describe "Cities", type: :request do
   describe "GET /cities" do
     it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get cities_path
-      response.status.should be(200)
+      state = FactoryGirl.create(:state)
+      get state_cities_path(state)
+      expect(response.status).to eq(200)
     end
   end
 end

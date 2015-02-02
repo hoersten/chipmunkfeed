@@ -11,16 +11,4 @@ require 'spec_helper'
 #   end
 # end
 describe StatesHelper, type: :helper do
-  describe "state_cities_path" do
-    it "state_cities_path" do
-      state = FactoryGirl.create(:state)
-      expect(state_cities_path(state)).to eq('/' + state.slug + '/cities')
-    end
-  end
-  describe "state_counties_path" do
-    it "state_counties_path" do
-      state = FactoryGirl.create(:state)
-      expect(state_counties_path(state)).to eq('/' + state.slug + '/counties')
-    end
-  end
 end

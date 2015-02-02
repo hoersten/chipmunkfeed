@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "counties/show" do
+describe "counties/show", type: 'view' do
   before(:each) do
     @county = assign(:county, stub_model(County,
       :name => "Name",

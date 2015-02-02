@@ -24,7 +24,8 @@
   .col-md-12
     %h3 
       List of Counties
-  -@counties.in_groups_of(4, false).each_with_index do |group, index|
-    -group.each do |county|
-      .col-md-3.col-sm-4.col-xs-6
-        =link_to county.display_name, county
+    %ul.list_of.counties
+      -@counties.in_groups_of(4, false).each_with_index do |group, index|
+        -group.each do |county|
+          .col-md-3.col-sm-4.col-xs-6
+            =link_to county.display_name, county
